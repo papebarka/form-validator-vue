@@ -14,9 +14,6 @@
         },
         
         methods: {
-          input($event){
-            this.value = $event.target.value
-          }
         },
 
         data(){
@@ -30,6 +27,10 @@
             if(this.rules.required && this.value.length === 0){
               return 'Value is required'
             }
+
+            if(this.rules.min && this.value.length < this.rules.min){
+              return `The minimum length is ${this.rules.min}`
+            }
           }
         }
     }
@@ -40,7 +41,7 @@
       <label :for="name">{{ name }}</label>
       <div class="error">{{ error }}</div>
     </div>
-    <input type="text" :id="username" :value="value" @input="input"/>
+    <input type="text" :id="username" v-model="value"/>
 </template>
 
 <style scoped></style>
