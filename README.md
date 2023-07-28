@@ -1,6 +1,8 @@
-# form-validator-vue
+# Form Validator Vue
 
-This template should help get you started developing with Vue 3 in Vite.
+This project explores the basic concepts of VueJS 3 with the option API.
+
+We implement a simple form with basic validation.
 
 ## Recommended IDE Setup
 
