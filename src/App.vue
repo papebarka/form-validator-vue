@@ -10,38 +10,55 @@
 
     data() {
       return {
-        valid: true,
         username: {
           value: "User",
-          valid: false
+          error: ""
         },
         password: {
           value: "pass",
-          valid: false
+          error: ""
         }
       }
     },
 
     methods: {
-      update({ name, value }){
+      submit(){
+        console.log("Submit")
+      },
+
+      update({ name, value, error }){
         this[name].value = value
+        this[name].error = error
+      }
+    },
+
+    computed: {
+      valid(){
+        return (
+          !this.username.error && !this.password.error
+        )
       }
     }
   }
 </script>
 
 <template>
-  <my-input name="Username"
-  :value="this.username.value"
-  :rules="{ required: true, min: 5 }"
-  @update="update"/>
+  <form @submit.prevent="submit">
+    <my-input name="Username"
+    :value="username.value"
+    :error="username.error"
+    :rules="{ required: true, min: 5 }"
+    @update="update"/>
 
-  <my-input name="Password"
-  :value="this.password.value"
-  :rules="{ required: true, min: 10 }"
-  @update="update"/>
+    <my-input name="Password"
+    type="password"
+    :value="password.value"
+    :error="password.error"
+    :rules="{ required: true, min: 10 }"
+    @update="update"/>
 
-  <my-button background="red" color="yellow" :disabled="!valid"/>
+    <my-button background="darkslateblue" color="white" :disabled="!valid"/>
+  </form>
 </template>
 
 <style scoped>
