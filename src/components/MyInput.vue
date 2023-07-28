@@ -5,6 +5,10 @@
                 type: String,
                 required: true
             },
+            value: {
+                type: String,
+                required: true
+            },
             rules: {
               //min: number
               //required: boolea
@@ -14,11 +18,16 @@
         },
         
         methods: {
+          input($event){
+            this.$emit('update', {
+              name: this.name.toLowerCase(),
+              value: $event.target.value
+            })
+          }
         },
 
         data(){
           return {
-            value: ''
           }
         },
 
@@ -41,7 +50,9 @@
       <label :for="name">{{ name }}</label>
       <div class="error">{{ error }}</div>
     </div>
-    <input type="text" :id="username" v-model="value"/>
+    <input type="text" :id="username"
+    :valuel="value"
+    @input="input"/>
 </template>
 
 <style scoped></style>

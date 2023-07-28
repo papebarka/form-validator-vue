@@ -10,7 +10,21 @@
 
     data() {
       return {
-        valid: true
+        valid: true,
+        username: {
+          value: "User",
+          valid: false
+        },
+        password: {
+          value: "pass",
+          valid: false
+        }
+      }
+    },
+
+    methods: {
+      update({ name, value }){
+        this[name].value = value
       }
     }
   }
@@ -18,7 +32,15 @@
 
 <template>
   <my-input name="Username"
-  :rules="{ required: true, min: 5 }"/>
+  :value="this.username.value"
+  :rules="{ required: true, min: 5 }"
+  @update="update"/>
+
+  <my-input name="Password"
+  :value="this.password.value"
+  :rules="{ required: true, min: 10 }"
+  @update="update"/>
+
   <my-button background="red" color="yellow" :disabled="!valid"/>
 </template>
 
